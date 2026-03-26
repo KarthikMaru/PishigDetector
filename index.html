@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PhishGuard | Phishing URL Detection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Browser-side security screening</p>
+          <h1>Check whether a URL looks like a phishing site.</h1>
+          <p class="hero-text">
+            Paste a link to get a quick risk score based on common phishing
+            patterns like spoofed domains, punycode, URL shorteners, credential
+            bait, and suspicious host structure.
+          </p>
+        </div>
+        <div class="hero-card">
+          <p class="hero-card-label">What this catches</p>
+          <ul>
+            <li>Lookalike or deceptive hostnames</li>
+            <li>Known shorteners and masked redirects</li>
+            <li>Risky URL structure and login bait</li>
+          </ul>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="panel detector-panel">
+          <div class="panel-heading">
+            <h2>Analyze a URL</h2>
+            <p>
+              The check runs locally in your browser. No URL leaves the page.
+            </p>
+          </div>
+
+          <form id="detector-form" class="detector-form">
+            <label for="url-input" class="label">Website URL</label>
+            <div class="input-row">
+              <input
+                id="url-input"
+                name="url"
+                type="text"
+                inputmode="url"
+                spellcheck="false"
+                placeholder="https://example.com/login"
+                autocomplete="off"
+              />
+              <button type="submit">Scan URL</button>
+            </div>
+          </form>
+
+          <div class="sample-links">
+            <span>Try a sample:</span>
+            <button class="sample-link" data-url="https://www.paypal.com/signin">
+              paypal.com
+            </button>
+            <button
+              class="sample-link"
+              data-url="http://secure-paypaI-login.verify-user-account.com"
+            >
+              spoofed login
+            </button>
+            <button
+              class="sample-link"
+              data-url="https://tinyurl.com/account-reset-alert"
+            >
+              shortener
+            </button>
+          </div>
+        </section>
+
+        <section class="panel results-panel" id="results-panel">
+          <div class="score-ring" id="score-ring">
+            <div>
+              <span class="score-label">Risk Score</span>
+              <strong id="score-value">0</strong>
+            </div>
+          </div>
+
+          <div class="result-summary">
+            <p class="status-tag neutral" id="status-tag">Waiting for scan</p>
+            <h2 id="summary-title">Paste a URL to inspect it.</h2>
+            <p id="summary-text">
+              You’ll get a risk level, the parsed hostname, and the signals that
+              contributed to the score.
+            </p>
+          </div>
+
+          <div class="meta-grid">
+            <article class="meta-card">
+              <span class="meta-label">Hostname</span>
+              <strong id="hostname-value">-</strong>
+            </article>
+            <article class="meta-card">
+              <span class="meta-label">Protocol</span>
+              <strong id="protocol-value">-</strong>
+            </article>
+            <article class="meta-card">
+              <span class="meta-label">Category</span>
+              <strong id="category-value">-</strong>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel findings-panel">
+          <div class="panel-heading">
+            <h2>Signals</h2>
+            <p>Each finding explains why the URL looks safer or riskier.</p>
+          </div>
+          <ul id="findings-list" class="findings-list">
+            <li class="finding finding-empty">
+              No scan yet. Results will appear here.
+            </li>
+          </ul>
+        </section>
+
+        <section class="panel tips-panel">
+          <div class="panel-heading">
+            <h2>Safer browsing tips</h2>
+          </div>
+          <div class="tips-grid">
+            <article>
+              <h3>Inspect the domain</h3>
+              <p>
+                Attackers often hide fake brand names inside long subdomains or
+                replace letters with similar-looking characters.
+              </p>
+            </article>
+            <article>
+              <h3>Be careful with shortened links</h3>
+              <p>
+                A shortener can hide the final destination, which makes scams
+                harder to spot before clicking.
+              </p>
+            </article>
+            <article>
+              <h3>Never trust urgency alone</h3>
+              <p>
+                “Reset now” or “verify immediately” language is common in
+                phishing campaigns that try to rush a decision.
+              </p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
